@@ -1,22 +1,31 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import axiosAuth from "./axiosAuth";
 
 const Login = () => {
-	const [formState, setFormState] = useState({
+	const history = useHistory();
+	const [credentials, setCredentials] = useState({
 		username: "",
 		password: "",
 		submitted: false,
 	});
 
 	const handleChanges = (e) => {
-		setFormState({
-			...formState,
+		setCredentials({
+			...credentials,
 			[e.target.name]: e.target.value,
 		});
 	};
 
 	const formSubmit = (e) => {
 		e.preventDefault();
-		setFormState({
+		axiosAuth()
+			.post("http://localhost:5000/api/login", credentials)
+			.then((res) => {
+				localStorage.setItem("token", res.data.token);
+				history.push("/bubble-page");
+			});
+		setCredentials({
 			username: "",
 			password: "",
 			submitted: false,
@@ -30,14 +39,14 @@ const Login = () => {
 				<label htmlFor="username">Username</label>
 				<input
 					name="username"
-					value={formState.username}
+					value={credentials.username}
 					placeholder="Please enter your username."
 					onChange={handleChanges}
 				/>
 				<label htmlFor="password">Password</label>
 				<input
 					name="password"
-					value={formState.password}
+					value={credentials.password}
 					placeholder="Please enter your password"
 					onChange={handleChanges}
 				/>
