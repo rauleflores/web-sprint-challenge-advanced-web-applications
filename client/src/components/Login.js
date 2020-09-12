@@ -24,8 +24,8 @@ const Login = () => {
 		axiosAuth()
 			.post("api/login", credentials)
 			.then((res) => {
-				localStorage.setItem("token", res.data.token);
-				console.log("Login AA token:", res.data.token);
+				localStorage.setItem("token", res.data.payload);
+				console.log("Login AA token:", res.data.payload);
 				history.push("/bubble-page");
 			});
 		setCredentials({

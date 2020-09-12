@@ -14,7 +14,10 @@ const BubblePage = () => {
 		console.log("BP token:", localStorage.getItem("token"));
 		axiosAuth()
 			.get("api/colors")
-			.then((res) => console.log("BubblePage colors:", res.data))
+			.then((res) => {
+				console.log("BubblePage colors:", res.data);
+				setColorList(res.data);
+			})
 			.catch((err) => console.log("Something went wrong:", err));
 	}, []);
 
