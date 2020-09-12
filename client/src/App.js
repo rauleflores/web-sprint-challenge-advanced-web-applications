@@ -7,6 +7,7 @@ import BubblePage from "./components/BubblePage";
 import "./styles.scss";
 
 function App() {
+	// localStorage.removeItem("token");
 	return (
 		<Router>
 			<div className="App">

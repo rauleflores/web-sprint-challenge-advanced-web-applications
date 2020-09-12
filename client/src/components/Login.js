@@ -19,10 +19,13 @@ const Login = () => {
 
 	const formSubmit = (e) => {
 		e.preventDefault();
+		console.log("LfS token:", localStorage.getItem("token"));
+
 		axiosAuth()
-			.post("http://localhost:5000/api/login", credentials)
+			.post("api/login", credentials)
 			.then((res) => {
 				localStorage.setItem("token", res.data.token);
+				console.log("Login AA token:", res.data.token);
 				history.push("/bubble-page");
 			});
 		setCredentials({
