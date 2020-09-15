@@ -45,7 +45,7 @@ const ColorList = ({ colors, updateColors }) => {
 			<ul>
 				{colors.map((color) => (
 					<li key={color.color} onClick={() => editColor(color)}>
-						<span>
+						<span data-testid="color">
 							<span
 								className="delete"
 								onClick={(e) => {
